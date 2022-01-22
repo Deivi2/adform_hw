@@ -1,25 +1,10 @@
-export interface IUser {
+export interface ICampaign {
   id: number;
   name: string;
-  username: string;
-  email: string;
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: {
-      lat: string;
-      lng: string;
-    };
-  };
-  phone: string;
-  website: string;
-  company: {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-  };
+  startDate: Date | string | null;
+  endDate: Date | string | null;
+  Budget: number;
+  userId: number;
 }
 
-export type IUsers = Array<IUser>;
+export type ICampaigns = Array<ICampaign>;

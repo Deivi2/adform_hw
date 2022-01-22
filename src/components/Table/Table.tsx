@@ -1,21 +1,20 @@
-import React, { FC } from "react";
-import { IUsers } from "../../typings/table";
+import React, { FC, useMemo } from "react";
+import { ICampaigns } from "../../typings/table";
+import { Body } from "./Body";
+import { Head } from "./Head";
 import { Root } from "./styles";
 
-interface ITable {
-  data: IUsers;
+interface IProps {
+  data: ICampaigns;
 }
 
-const Table: FC<ITable> = (props) => {
+const Table: FC<IProps> = (props) => {
+  const headers = useMemo(() => Object.keys(props.data[0]), [props.data]);
+
   return (
     <Root>
-      <thead>
-        <tr>
-          <th>Row</th>
-          <th>Row</th>
-          <th>Row</th>
-        </tr>
-      </thead>
+      <Head headers={headers} />
+      <Body data={props.data} />
     </Root>
   );
 };

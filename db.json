@@ -52,7 +52,7 @@
             "id": 7,
             "name": "Blogtag",
             "startDate": "6/27/2017",
-            "endDate": "1/15/2018",
+            "endDate": "1/15/2023",
             "Budget": 109078,
             "userId": 2
         },
@@ -76,7 +76,7 @@
             "id": 10,
             "name": "Realbridge",
             "startDate": "3/5/2018",
-            "endDate": "10/2/2017",
+            "endDate": "10/2/2022",
             "Budget": 505602,
             "userId": 5
         }
