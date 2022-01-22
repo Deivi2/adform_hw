@@ -1,9 +1,10 @@
 export interface ICampaign {
+  active?: boolean;
   id: number;
   name: string;
-  startDate: Date | string | null;
-  endDate: Date | string | null;
-  Budget: number;
+  startDate: Date | string | number;
+  endDate: Date | string | number;
+  Budget: number | string;
   userId: number;
 }
 
