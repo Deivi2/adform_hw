@@ -6,26 +6,25 @@ import { Head } from "./Head";
 import { Root } from "./styles";
 
 interface IProps {
-  data: ICampaigns;
+  data?: ICampaigns;
+  searchData?: ICampaigns;
 }
 
 const Table: FC<IProps> = (props) => {
   const parsedData = useMemo(() => {
-    return [...props.data].map((cur) => {
+    return props.searchData?.map((cur) => {
       cur.Budget = toLocaleStringWithCurrency(cur.Budget, "USD");
-      new Date(cur.endDate) < new Date()
-        ? (cur.active = false)
-        : (cur.active = true);
+      new Date(cur.endDate) >= new Date()
+        ? (cur.active = true)
+        : (cur.active = false);
 
       return cur;
     });
-  }, [props.data]);
-
-  const headers = useMemo(() => Object.keys(parsedData[0]), [parsedData]);
+  }, [props.searchData]);
 
   return (
     <Root>
-      <Head headers={headers} />
+      <Head data={props.data} />
       <Body data={parsedData} />
     </Root>
   );
