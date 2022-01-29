@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC } from "react";
-import { Label, Root } from "./styles";
+import { Root } from "./styles";
 
 interface IProps {
   type: string;
@@ -16,8 +16,9 @@ const Input: FC<IProps> = (props) => {
         name={props.name}
         onChange={props.onChange}
         maxLength={20}
+        placeholder={props.label}
       />
-      <Label>{props.label}</Label>
+      {/* <Label>{props.label}</Label> */}
     </Root>
   );
 };

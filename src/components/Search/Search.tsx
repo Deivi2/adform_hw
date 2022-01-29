@@ -21,17 +21,15 @@ const Search: FC<IProps> = (props) => {
       <DatePickers>
         <DatePicker
           selected={props.date.startDate}
-          onChange={(date, e) => {
+          onChange={(date) => {
             props.setDate((prevVal) => ({ ...prevVal, startDate: date }));
-            // props.handleDateRange("start", date, e);
           }}
           placeholderText={"Start date"}
         />
         <DatePicker
           selected={props.date.endDate}
-          onChange={(date, e) => {
+          onChange={(date) => {
             props.setDate((prevVal) => ({ ...prevVal, endDate: date }));
-            // props.handleDateRange("end", date, e);
           }}
           placeholderText={"End date"}
         />
