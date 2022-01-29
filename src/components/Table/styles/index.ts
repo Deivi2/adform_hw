@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Root = styled.table`
   width: 100%;
@@ -20,7 +20,7 @@ export const Root = styled.table`
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #27ca27;
+    background-color: #2782ca;
     color: white;
   }
 `;
