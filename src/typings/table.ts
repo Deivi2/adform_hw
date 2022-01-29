@@ -9,3 +9,8 @@ export interface ICampaign {
 }
 
 export type ICampaigns = Array<ICampaign>;
+
+export interface IDateRange {
+  startDate: Date | null;
+  endDate: Date | null;
+}
