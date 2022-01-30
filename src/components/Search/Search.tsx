@@ -1,9 +1,9 @@
 import { Input } from "common";
-import { ChangeEvent, Dispatch, FC, SyntheticEvent } from "react";
+import { ChangeEvent, Dispatch, FC } from "react";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { IDateRange } from "typings/table";
 import { DatePickers, Root } from "./style";
-import "react-datepicker/dist/react-datepicker.css";
 
 interface IProps {
   handleSearch: (event: ChangeEvent<HTMLInputElement>) => void;
