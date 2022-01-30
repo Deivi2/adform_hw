@@ -1,15 +1,17 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { ICampaign, ICampaigns, IDateRange } from "typings/table";
-import { Search, Table } from "./components";
+import { Search, Table, TextBox } from "./components";
 
 function App() {
+  const [fetchedData, setFetchedData] = useState<ICampaigns>();
   const [searchData, setSearchData] = useState<ICampaigns>();
-  const [searchValue, setSearchValue] = useState<string>();
+  const [searchValue, setSearchValue] = useState<string>("");
   const [date, setDate] = useState<IDateRange>({
     startDate: null,
     endDate: null,
   });
+  const [campaignsError, setCampaignsError] = useState<string>();
 
   const { startDate, endDate } = date;
 
@@ -22,13 +24,19 @@ function App() {
   );
 
   useEffect(() => {
-    const endBeforeStart = !!startDate && !!endDate && startDate > endDate;
-    if (!!endBeforeStart) return;
-    if (!startDate && !endDate && !searchValue) return setSearchData(data);
+    setFetchedData(data);
+  }, [data]);
 
-    const newSearchData = data
+  useEffect(() => {
+    const endBeforeStart = !!startDate && !!endDate && startDate > endDate;
+    if (!!endBeforeStart) setSearchData([]);
+    if (!startDate && !endDate && !searchValue)
+      return setSearchData(fetchedData);
+
+    const newSearchData = fetchedData
       ?.filter((values: ICampaign) =>
         values.name
+          .trim()
           .toLocaleLowerCase()
           ?.includes(`${searchValue?.toLocaleLowerCase()}`)
       )
@@ -56,11 +64,21 @@ function App() {
       });
 
     setSearchData(newSearchData);
-  }, [startDate, endDate, searchValue, data]);
+  }, [startDate, endDate, searchValue, data, fetchedData]);
 
   const handleSearchByName = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setSearchValue(value);
+  };
+
+  const addCampaigns = (campaigns?: string) => {
+    try {
+      const campaignsJson = !!campaigns ? JSON.parse(campaigns) : [];
+      const existingData = !!fetchedData ? fetchedData : [];
+      setFetchedData([...existingData, ...campaignsJson]);
+    } catch (e: any) {
+      setCampaignsError(e.message);
+    }
   };
 
   if (isLoading) return <>Loading Data</>;
@@ -70,6 +88,7 @@ function App() {
     <>
       <Search date={date} setDate={setDate} handleSearch={handleSearchByName} />
       <Table searchData={searchData} data={data} />
+      <TextBox addCampaigns={addCampaigns} campaignsError={campaignsError} />
     </>
   );
 }
